@@ -1,0 +1,125 @@
+loadstring([[
+if game.PlaceId == 4483381587 then
+    local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
+    local Window = OrionLib:MakeWindow({Name = "Arti scripts [ solara support xeno support ]", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+    
+    -- Badge ID (replace with your actual Badge ID)
+    local badgeId = 12345678 -- Change this to your badge ID
+    local BadgeService = game:GetService("BadgeService")
+
+    -- Function to award badge
+    local function awardBadge(player)
+        local success, hasBadge = pcall(function()
+            return BadgeService:UserHasBadge(player.UserId, badgeId)
+        end)
+
+        if success and not hasBadge then
+            local success, message = pcall(function()
+                BadgeService:AwardBadge(player.UserId, badgeId)
+            end)
+
+            if success then
+                print("Badge awarded to " .. player.Name)
+            else
+                warn("Failed to award badge: " .. message)
+            end
+        end
+    end
+
+    -- Connect to player added event
+    game.Players.PlayerAdded:Connect(awardBadge)
+
+    -- Create a tab
+    local Tab1 = Window:MakeTab({
+        Name = "The Strongest Battle Ground",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
+    })
+
+    -- Create another tab
+    local Tab2 = Window:MakeTab({
+        Name = "scripts",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
+    })
+
+    -- Add a button to load the script from Pastebin
+    Tab1:AddButton({
+        Name = "The Strongest Battleground Script",
+        Callback = function()
+            loadstring(game:HttpGet('https://pastebin.com/raw/zx3081xc'))()
+            print("Pastebin script executed")
+        end,
+    })
+
+    -- Add an input box for speed
+    Tab2:AddTextbox({
+        Name = "Set Speed",
+        Default = "16",
+        TextDisappear = true,
+        Callback = function(Value)
+            local speedValue = tonumber(Value)
+            if speedValue and speedValue > 0 then
+                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = speedValue
+                print("Speed set to: " .. speedValue)
+            else
+                print("Please enter a valid speed.")
+            end
+        end    
+    })
+
+    -- Add a button to apply speed
+    Tab2:AddButton({
+        Name = "Apply Speed",
+        Callback = function()
+            local currentSpeed = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed
+            print("Current speed is: " .. currentSpeed)
+        end    
+    })
+
+    -- Add an input box for jump power
+    Tab2:AddTextbox({
+        Name = "Set Jump Power",
+        Default = "50",
+        TextDisappear = true,
+        Callback = function(Value)
+            local jumpValue = tonumber(Value)
+            if jumpValue and jumpValue > 0 then
+                game.Players.LocalPlayer.Character.Humanoid.JumpPower = jumpValue
+                print("Jump power set to: " .. jumpValue)
+            else
+                print("Please enter a valid jump power.")
+            end
+        end    
+    })
+
+    -- Add a button to apply jump power
+    Tab2:AddButton({
+        Name = "Apply Jump Power",
+        Callback = function()
+            local currentJumpPower = game.Players.LocalPlayer.Character.Humanoid.JumpPower
+            print("Current jump power is: " .. currentJumpPower)
+        end    
+    })
+
+    -- Add a button to load the flying script
+    Tab2:AddButton({
+        Name = "Toggle Fly",
+        Callback = function()
+            loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\40\39\104\116\116\112\115\58\47\47\103\105\115\116\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\109\101\111\122\111\110\101\89\84\47\98\102\48\51\55\100\102\102\57\102\48\97\55\48\48\49\55\51\48\52\100\100\100\54\55\102\100\99\100\51\55\48\47\114\97\119\47\101\49\52\101\55\52\102\52\50\53\98\48\54\48\100\102\53\50\51\51\52\51\99\102\51\48\98\55\56\55\48\55\52\101\98\51\99\53\100\50\47\97\114\99\101\117\115\37\50\53\50\48\120\37\50\53\50\48\102\108\121\37\50\53\50\48\50\37\50\53\50\48\111\98\102\108\117\99\97\116\111\114\39\41\44\116\114\117\101\41\41\40\41\10\10")()
+            print("arti made by arti")
+        end,
+    })
+
+    -- Add a button to load Infinite Yield
+    Tab2:AddButton({
+        Name = "Load Infinite Yield",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+            print("Infinite Yield loaded")
+        end,
+    })
+
+    OrionLib:Init() -- Initialize the Orion library
+end
+]])()
